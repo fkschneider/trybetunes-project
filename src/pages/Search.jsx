@@ -30,7 +30,6 @@ class Search extends React.Component {
     this.setState({ isLoading: true });
     const searchAlbumsByArtist = await searchAlbumsAPI(inputArtist);
     this.setState({ isLoading: false, searchedAlbums: searchAlbumsByArtist });
-    // console.log(searchAlbumsByArtist);
   };
 
   render() {
@@ -65,10 +64,11 @@ class Search extends React.Component {
         </button>
         <span>
           {searchedAlbums.length !== 0
-            ? <p>
+            ? (<p>
+              {' '}
               Resultado de álbuns de:
               {inputArtist}
-            </p>
+            </p>)
             : <p>Nenhum álbum foi encontrado</p>}
         </span>
         <div>
