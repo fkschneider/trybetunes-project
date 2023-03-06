@@ -37,14 +37,16 @@ class Album extends React.Component {
         <div>
           <p data-testid="artist-name">{artist}</p>
           <p data-testid="album-name">{album}</p>
-          <MusicCard songs={ songs } />
-          {/* {songs.filter((element) => element !== songs[0]).map((song) => {
+          {/* <MusicCard songs={ songs } /> */}
+          {songs.filter((element) => element !== songs[0]).map((song) => (
             <MusicCard
-              trackName={song.trackName}
-              previewUrl={song.previewUrl}
-              key={song.trackId}
+              song={ song }
+              trackName={ song.trackName }
+              trackId={ song.trackId }
+              previewUrl={ song.previewUrl }
+              key={ song.trackId }
             />
-          })} */}
+          ))}
         </div>
       </div>
     );

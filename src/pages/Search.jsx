@@ -12,6 +12,7 @@ class Search extends React.Component {
       isLoading: false,
       inputArtist: '',
       searchedAlbums: [],
+      userSearch: '',
     };
   }
 
@@ -27,9 +28,12 @@ class Search extends React.Component {
   // busca álbuns pelo artista (req 6)
   handleAlbums = async () => {
     const { inputArtist } = this.state;
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, userSearch: inputArtist });
     const searchAlbumsByArtist = await searchAlbumsAPI(inputArtist);
-    this.setState({ isLoading: false, searchedAlbums: searchAlbumsByArtist });
+    this.setState({
+      isLoading: false,
+      searchedAlbums: searchAlbumsByArtist,
+      inputArtist: '' });
   };
 
   render() {
@@ -37,6 +41,7 @@ class Search extends React.Component {
       isSearchButtonDisabled,
       isLoading,
       searchedAlbums,
+      userSearch,
       inputArtist,
     } = this.state;
 
@@ -63,13 +68,12 @@ class Search extends React.Component {
           Pesquisar
         </button>
         <span>
-          {searchedAlbums.length !== 0
-            ? (<p>
-              {' '}
-              Resultado de álbuns de:
-              {inputArtist}
-            </p>)
-            : <p>Nenhum álbum foi encontrado</p>}
+          {searchedAlbums.length === 0 ? <p>Nenhum álbum foi encontrado</p>
+            : (
+              <p>
+                {`Resultado de álbuns de: ${userSearch}`}
+              </p>
+            )}
         </span>
         <div>
           <ul>
