@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
-import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor(props) {
@@ -15,14 +15,12 @@ class Album extends React.Component {
       album: '',
       isLoading: true,
       faveSongs: [],
-      savedSongs: [],
-      isFavorite: false,
     };
   }
 
   componentDidMount() {
     this.getAlbum();
-    this.favoriteSongs()
+    this.favoriteSongs();
   }
 
   // request dos álbuns e atualização de estado (req 7)
