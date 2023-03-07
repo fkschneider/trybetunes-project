@@ -9,6 +9,7 @@ class MusicCard extends React.Component {
       trackId,
       favoriteSongs,
       checked,
+      faveSongs,
     } = this.props;
 
     return (
