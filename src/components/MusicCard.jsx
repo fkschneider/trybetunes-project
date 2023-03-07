@@ -7,9 +7,10 @@ class MusicCard extends React.Component {
       trackName,
       previewUrl,
       trackId,
-      favoriteSongs,
+      onChange,
       checked,
     } = this.props;
+    console.log(checked);
 
     return (
       <div>
@@ -50,26 +51,13 @@ class MusicCard extends React.Component {
           htmlFor={ `${trackName}` }
         >
           Favorita
-          {
-            checked
-              ? (
-                <input
-                  type="checkbox"
-                  name={ `${trackName}` }
-                  onChange={ favoriteSongs }
-                  checked
-                  data-testid={ `checkbox-music-${trackId}` }
-                />
-              )
-              : (
-                <input
-                  type="checkbox"
-                  name={ `${trackName}` }
-                  onChange={ favoriteSongs }
-                  data-testid={ `checkbox-music-${trackId}` }
-                />
-              )
-          }
+          <input
+            type="checkbox"
+            name={ `${trackName}` }
+            onChange={ onChange }
+            checked={ checked }
+            data-testid={ `checkbox-music-${trackId}` }
+          />
         </label>
       </div>
     );
@@ -80,7 +68,7 @@ MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.string.isRequired,
-  favoriteSongs: PropTypes.string.isRequired,
+  onChange: PropTypes.string.isRequired,
   checked: PropTypes.string.isRequired,
 };
 

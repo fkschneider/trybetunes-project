@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Album extends React.Component {
 
   componentDidMount() {
     this.getAlbum();
-    this.favoriteSongs();
+    this.favoriteList();
   }
 
   // request dos álbuns e atualização de estado (req 7)
@@ -50,12 +50,22 @@ class Album extends React.Component {
   };
 
   // func chamada ao clicar no checkbox Favorita; chama addSong (req 8)
-  favoriteSongs = (song) => {
-    this.setState({ isLoading: true }, async () => {
+  onChange = async (target, song) => {
+    // console.log(target.checked, song);
+    this.setState({ isLoading: true });
+    if (target.checked) {
       await addSong(song);
-      const heartSongs = await getFavoriteSongs();
-      this.setState({ isLoading: false, faveSongs: heartSongs });
-    });
+    } else {
+      await removeSong(song);
+    }
+    const heartSongs = await getFavoriteSongs();
+    this.setState({ isLoading: false, faveSongs: heartSongs });
+  };
+
+  favoriteList = async () => {
+    this.setState({ isLoading: true });
+    const heartSongs = await getFavoriteSongs();
+    this.setState({ isLoading: false, faveSongs: heartSongs || [] });
   };
 
   render() {
@@ -75,8 +85,9 @@ class Album extends React.Component {
                   trackId={ song.trackId }
                   previewUrl={ song.previewUrl }
                   key={ song.trackId }
+                  song={ song }
                   // handleCheck={this.handleCheck}
-                  favoriteSongs={ () => this.favoriteSongs(song) }
+                  onChange={ ({ target }) => this.onChange(target, song) }
                   checked={ this.checked(song) }
                   faveSongs
                 />
