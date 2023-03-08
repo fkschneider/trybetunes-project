@@ -35,15 +35,6 @@ class Album extends React.Component {
     });
   };
 
-  //  (req 8)
-  // handleCheck = ({ target }) => {
-  //   if (target.checked) {
-  //     this.setState({ checked: true }, () => this.favoriteSongs());
-  //   } else {
-  //     this.setState({ checked: false });
-  //   }
-  // };
-
   checked = (song) => {
     const { faveSongs } = this.state;
     return faveSongs.some((music) => song.trackId === music.trackId);
@@ -78,7 +69,6 @@ class Album extends React.Component {
             <div>
               <p data-testid="artist-name">{artist}</p>
               <p data-testid="album-name">{album}</p>
-              {/* <MusicCard songs={ songs } /> */}
               {songs.filter((element) => element !== songs[0]).map((song) => (
                 <MusicCard
                   trackName={ song.trackName }
@@ -86,7 +76,6 @@ class Album extends React.Component {
                   previewUrl={ song.previewUrl }
                   key={ song.trackId }
                   song={ song }
-                  // handleCheck={this.handleCheck}
                   onChange={ ({ target }) => this.onChange(target, song) }
                   checked={ this.checked(song) }
                   faveSongs
