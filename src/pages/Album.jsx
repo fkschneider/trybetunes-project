@@ -35,13 +35,13 @@ class Album extends React.Component {
     });
   };
 
-  // verifica
+  //
   checked = (song) => {
     const { faveSongs } = this.state;
     return faveSongs.some((music) => song.trackId === music.trackId);
   };
 
-  // func chamada ao clicar no checkbox Favorita; adiciona e remove músicas (req 8)
+  // func called when checkbox Favorita is clicked; adds and removes song (req 8)
   onChange = async (target, song) => {
     // console.log(target.checked, song);
     this.setState({ isLoading: true });
@@ -54,7 +54,7 @@ class Album extends React.Component {
     this.setState({ isLoading: false, faveSongs: heartSongs });
   };
 
-  // func que renderiza a lista de favoritas ao entrar no álbum
+  // func that renders list of favorites on album page
   favoriteList = async () => {
     this.setState({ isLoading: true });
     const heartSongs = await getFavoriteSongs();

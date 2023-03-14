@@ -13,7 +13,7 @@ class Login extends React.Component {
     };
   }
 
-  // aciona a validação do botão Entrar (req 2)
+  // triggers validation of Entrar button (req 2)
   onInputChange = ({ target }) => {
     const { name, value } = target;
     this.setState({
@@ -23,7 +23,7 @@ class Login extends React.Component {
     });
   };
 
-  // faz com que o botão Entrar só funcione depois de 3 caracteres (req 2)
+  // makes it so that Entrar button only works after 3 characters are typed (req 2)
   validateButton = () => {
     const { name } = this.state;
     const minNum = 3;
@@ -31,7 +31,7 @@ class Login extends React.Component {
     return nameButton;
   };
 
-  // func acionada ao clicar o botão Entrar (req 2)
+  // func triggered when clicking Entrar button (req 2)
   handleClick = async () => {
     const { name } = this.state;
     const { history } = this.props;

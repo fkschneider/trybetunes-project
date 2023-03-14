@@ -16,7 +16,7 @@ class Search extends React.Component {
     };
   }
 
-  // validação do botão Pesquisar/atualizar estado inputArtist (req 5 e 6)
+  // Pesquisar button validation/updates inputArtist state (req 5 e 6)
   handleChange = ({ target }) => {
     const { value } = target;
     this.setState({ inputArtist: value });
@@ -25,7 +25,7 @@ class Search extends React.Component {
     }
   };
 
-  // busca álbuns pelo artista (req 6)
+  // searches albums by artist (req 6)
   handleAlbums = async () => {
     const { inputArtist } = this.state;
     this.setState({ isLoading: true, userSearch: inputArtist });

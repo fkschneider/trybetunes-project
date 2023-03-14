@@ -16,7 +16,7 @@ class Header extends React.Component {
     this.userInfo();
   }
 
-  // pega o nome do usuário e exibe na tela (req 3)
+  // captures username and renders it on screen (req 3)
   userInfo = async () => {
     this.setState({ isLoading: true });
     const user = await getUser();

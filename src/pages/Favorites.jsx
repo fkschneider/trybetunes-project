@@ -16,19 +16,21 @@ class Favorites extends React.Component {
     this.lovedTracks();
   }
 
+  // func that renders favorite songs on page Favorites;
   lovedTracks = async () => {
     this.setState({ isLoading: true });
     const likedSongs = await getFavoriteSongs();
     this.setState({ isLoading: false, faves: likedSongs });
   };
 
+  // checks if song is favorite
   checked = (fav) => {
     const { faves } = this.state;
     return faves.some((music) => fav.trackId === music.trackId);
   };
 
-  // func chamada ao clicar no checkbox Favorita; adiciona e remove músicas (req 8)
-  onChange = async (target, song) => {
+  // func called when checkbox Favorita is clicked; removes songs from favorites list (req 12);
+  onClick = async (target, song) => {
     // console.log(target.checked, song);
     this.setState({ isLoading: true });
     if (target.checked) {
@@ -36,18 +38,9 @@ class Favorites extends React.Component {
     } else {
       await removeSong(song);
     }
-    const heartSongs = await getFavoriteSongs();
-    this.setState({ isLoading: false, faves: heartSongs });
+    const lovedSongs = await getFavoriteSongs();
+    this.setState({ isLoading: false, faves: lovedSongs });
   };
-  // handleChange = async ({ target }) => {
-  //   // const { name } = target;
-  //   const { faves } = this.state;
-  //   const value = (target.type === 'checkbox') ? target.checked : target.value;
-  //   console.log(value);
-  //   if (value === false) {
-  //     await removeSong(faves[target.value]);
-  //   }
-  // };
 
   render() {
     const { isLoading, faves } = this.state;
@@ -83,7 +76,7 @@ class Favorites extends React.Component {
                   name={ `${fav.trackName}` }
                   data-testid={ `checkbox-music-${fav.trackId}` }
                   checked={ this.checked(fav) }
-                  onChange={ ({ target }) => this.onChange(target, fav) }
+                  onChange={ ({ target }) => this.onClick(target, fav) }
                 />
               </label>
             </div>
